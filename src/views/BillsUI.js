@@ -20,7 +20,7 @@ const row = (bill) => {
 };
 
 const rows = (data) => {
-  // return data && data.length ? data.map((bill) => row(bill)).join("") : "";
+  // add sort bills by descending order
   return data && data.length
     ? data
         .sort((a, b) => new Date(b.date) - new Date(a.date))

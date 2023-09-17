@@ -19,30 +19,46 @@ export default class NewBill {
   }
   handleChangeFile = (e) => {
     e.preventDefault();
-    const file = this.document.querySelector(`input[data-testid="file"]`)
-      .files[0];
-    const filePath = e.target.value.split(/\\/g);
-    const fileName = filePath[filePath.length - 1];
+    const inputFile = this.document.querySelector(`input[data-testid="file"]`);
+    const errorMessage = this.document.querySelector(".error-file");
+    const file = inputFile.files[0];
+    const filePath = inputFile.value.split(/\\/g);
+    let fileName = filePath[filePath.length - 1];
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
-    formData.append("file", file);
-    formData.append("email", email);
 
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true,
-        },
-      })
-      .then(({ fileUrl, key }) => {
-        console.log(fileUrl);
-        this.billId = key;
-        this.fileUrl = fileUrl;
-        this.fileName = fileName;
-      })
-      .catch((error) => console.error(error));
+    // if file extension is not png, jpeg or jpg
+    if (
+      file.type !== "image/png" &&
+      file.type !== "image/jpeg" &&
+      "image/jpg"
+
+      // add class visible
+    ) {
+      errorMessage.classList.add("visible");
+      inputFile.value = "";
+      return;
+
+      // else delete class visible
+    } else {
+      errorMessage.classList.remove("visible");
+      formData.append("file", file);
+      formData.append("email", email);
+      this.store
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true,
+          },
+        })
+        .then(({ fileUrl, key }) => {
+          this.billId = key;
+          this.fileUrl = fileUrl;
+          this.fileName = fileName;
+        })
+        .catch((error) => console.error(error));
+    }
   };
   handleSubmit = (e) => {
     e.preventDefault();
