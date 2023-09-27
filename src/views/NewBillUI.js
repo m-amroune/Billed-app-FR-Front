@@ -55,8 +55,8 @@ export default () => {
                   <div class="col-half">
                     <label for="file" class="bold-label">Justificatif</label>
                     <input required type="file" class="form-control blue-border" data-testid="file" />
-                    <div class="error-file" data-testid="file-error-message">image extension must be jpg/jpeg or jpg</div>
-                    </div>
+                    <div class="error-file" data-testid="file-error-message">image extension must be png, jpeg or jpg</div>
+                    
           
                   </div>
                 </div>
