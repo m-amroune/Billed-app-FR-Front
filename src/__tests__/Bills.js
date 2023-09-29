@@ -51,7 +51,7 @@ describe("Given I am connected as an employee", () => {
 
 describe("Given I am connected as an employee", () => {
   describe("When I am on Bills Page and I click on New Bill button", () => {
-    test("Then, modal should be displayed", () => {
+    test("Then, form page should be displayed", () => {
       const html = BillsUI({ data: [] });
       document.body.innerHTML = html;
       const onNavigate = (pathname) => {
@@ -68,6 +68,32 @@ describe("Given I am connected as an employee", () => {
       button.addEventListener("click", buttonNewBill);
       userEvent.click(button);
       expect(buttonNewBill).toHaveBeenCalled();
+    });
+  });
+  describe("When I click on icon eye", () => {
+    test("then, modal should be displayed", () => {
+      const html = BillsUI({ data: bills });
+      document.body.innerHTML = html;
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname });
+      };
+      const myBills = new Bills({
+        document,
+        onNavigate,
+        firestore: null,
+        localStorage: window.localStorage,
+      });
+
+      $.fn.modal = jest.fn();
+
+      const iconEye = screen.getAllByTestId("icon-eye")[0];
+      const handleClickIconEye = jest.fn((e) => {
+        e.preventDefault();
+        myBills.handleClickIconEye(iconEye);
+      });
+      iconEye.addEventListener("click", handleClickIconEye);
+      userEvent.click(iconEye);
+      expect(handleClickIconEye).toHaveBeenCalled();
     });
   });
 });
