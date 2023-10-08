@@ -12,7 +12,7 @@ import router from "../app/Router.js";
 
 describe("Given I am connected as an employee", () => {
   describe("When I am on NewBill Page", () => {
-    test("Then mail icon in vertical layout should be highlighted", async () => {
+    test("Then, mail icon in vertical layout should be highlighted", async () => {
       Object.defineProperty(window, "localStorage", {
         value: localStorageMock,
       });
@@ -68,4 +68,39 @@ describe("Given I am connected as an employee", () => {
       expect(inputFile.files[0].name).toBe("file.png");
     });
   });
+  describe("When the file extension is not png, jpeg or jpg", () => {
+    test("Then, it should not be uploaded", () => {
+      document.body.innerHTML = NewBillUI();
+
+      const newBill = new NewBill({
+        document,
+        onNavigate,
+        firestore: null,
+        localStorage: window.localStorage,
+      });
+
+      const handleChangeFile = jest.fn(newBill.handleChangeFile);
+
+      const inputFile = screen.getByTestId("file");
+      inputFile.addEventListener("change", handleChangeFile);
+
+      const errorFile = new File(["test.psb"], "test.psb", {
+        type: "document/psb",
+      });
+      fireEvent.change(inputFile, {
+        target: { files: [errorFile] },
+      });
+
+      const errorMessage = screen.getByTestId("file-error-message");
+
+      expect(handleChangeFile).toHaveBeenCalled();
+      expect(inputFile.value).not.toBe("test.psb");
+      expect(errorMessage.textContent).toEqual(
+        expect.stringContaining("image extension must be png, jpeg or jpg")
+      );
+      expect(errorMessage.classList.contains("visible")).toBeTruthy();
+    });
+  });
 });
+
+// Test integration POST
