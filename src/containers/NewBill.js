@@ -26,19 +26,16 @@ export default class NewBill {
     let fileName = filePath[filePath.length - 1];
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
-
     // if file extension is not png, jpeg or jpg
     if (
       file.type !== "image/png" &&
       file.type !== "image/jpeg" &&
       "image/jpg"
-
       // add class visible
     ) {
       errorMessage.classList.add("visible");
       inputFile.value = "";
       return;
-
       // else delete class visible
     } else {
       errorMessage.classList.remove("visible");
