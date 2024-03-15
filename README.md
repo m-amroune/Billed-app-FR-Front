@@ -1,6 +1,6 @@
 Projet : Débuggez et testez un SaaS RH
 
-Language && technologie
+Language and technologie
 
 - [![Made-with-Javascript](https://img.shields.io/badge/Made%20with-Javascript-green)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 - [![Made-with-Jest](https://img.shields.io/badge/Made%20with-Jest-red)](https://jestjs.io/fr/docs/getting-started)
