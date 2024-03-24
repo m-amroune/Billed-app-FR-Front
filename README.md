@@ -1,6 +1,15 @@
-Projet : Débuggez et testez un SaaS RH
+# Billed
 
-Language and technologie
+Projet formation OpenClassrooms : Débuggez et testez un SaaS RH
+
+## Skills
+
+- Writing unit tests with JavaScript
+- Debugging a web application with the Chrome Debugger
+- Writing a manual end-to-end test plan
+- Writing integration tests with JavaScript
+
+## Language and technologie
 
 - [![Made-with-Javascript](https://img.shields.io/badge/Made%20with-Javascript-green)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
 - [![Made-with-Jest](https://img.shields.io/badge/Made%20with-Jest-red)](https://jestjs.io/fr/docs/getting-started)
